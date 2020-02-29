@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+
+<specVersion>
+	<major>1</major>
+	<minor>0</minor>
+</specVersion>
+
+<device>
+	<deviceType>urn:schemas-upnp-org:device:InternetGatewayDevice:2</deviceType>
+	<friendlyName>DSL Router</friendlyName>
+	<manufacturer>Arcadyan, Inc.</manufacturer>
+	<manufacturerURL>http://www.arcadyan.com/</manufacturerURL>
+	<modelDescription>ADSL IAD Router with UPnP support</modelDescription>
+	<modelName>VRV9510KWAC23</modelName>
+	<modelNumber>00.96.608S</modelNumber>
+	<modelURL>http://www.arcadyan.com/</modelURL>
+	<serialNumber>J452064956</serialNumber>
+	<UDN>uuid:00000000-0000-0001-0000-4c09d4754930</UDN>
+	<UPC />
+
+	<serviceList>
+	<service>
+		<serviceType>urn:schemas-microsoft-com:service:OSInfo:1</serviceType>
+		<serviceId>urn:microsoft-com:serviceId:OSInfo1</serviceId>
+		<SCPDURL>/igd_osf.xml</SCPDURL>
+		<controlURL>/upnp/control?OSInfo</controlURL>
+		<eventSubURL>/upnp/event?OSInfo</eventSubURL>
+	</service>
+	</serviceList>
+
+	<deviceList>
+	<device>
+		<deviceType>urn:schemas-upnp-org:device:WANDevice:2</deviceType>
+		<friendlyName>DSL Router(WAN)</friendlyName>
+		<manufacturer>Arcadyan, Inc.</manufacturer>
+		<manufacturerURL>http://www.arcadyan.com/</manufacturerURL>
+		<modelDescription>ADSL IAD Router with UPnP support (WAN Interface Device)</modelDescription>
+		<modelName>VRV9510KWAC23 WAN Interface</modelName>
+		<modelNumber>00.96.608S</modelNumber>
+		<modelURL>http://www.arcadyan.com/</modelURL>
+		<serialNumber>J452064956</serialNumber>
+    	<UDN>uuid:00000000-0000-0001-0001-4c09d4754930</UDN>
+    	<UPC />
+		<serviceList>
+		<service>
+			<serviceType>urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1</serviceType>
+			<serviceId>urn:upnp-org:serviceId:WANCommonIFC1</serviceId>
+			<SCPDURL>/igd_wcic.xml</SCPDURL>
+			<controlURL>/upnp/control?WANCommonInterfaceConfig</controlURL>
+			<eventSubURL>/upnp/event?WANCommonInterfaceConfig</eventSubURL>
+		</service>
+		</serviceList>
+
+		<deviceList>
+		<device>
+			<deviceType>urn:schemas-upnp-org:device:WANConnectionDevice:2</deviceType>
+			<friendlyName>DSL Router(WAN Con)</friendlyName>
+			<manufacturer>Arcadyan, Inc.</manufacturer>
+			<manufacturerURL>http://www.arcadyan.com/</manufacturerURL>
+			<modelDescription>ADSL IAD Router with UPnP support (WAN Connection Device)</modelDescription>
+			<modelName>VRV9510KWAC23 WAN Connector</modelName>
+			<modelNumber>00.96.608S</modelNumber>
+			<modelURL>http://www.arcadyan.com/</modelURL>
+			<serialNumber>J452064956</serialNumber>
+        	<UDN>uuid:00000000-0000-0001-0002-4c09d4754930</UDN>
+        	<UPC />
+
+			<serviceList>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:WANEthernetLinkConfig:1</serviceType>
+				<serviceId>urn:upnp-org:serviceId:WANEthLinkC1</serviceId>
+				<SCPDURL>/igd_wec.xml</SCPDURL>
+				<controlURL>/upnp/control?WANEthernetLinkConfig</controlURL>
+				<eventSubURL>/upnp/event?WANEthernetLinkConfig</eventSubURL>
+			</service>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:WANPPPConnection:1</serviceType>
+				<serviceId>urn:upnp-org:serviceId:WANPPPConn1</serviceId>
+				<SCPDURL>/igd_wpc.xml</SCPDURL>
+				<controlURL>/upnp/control?WANPPPConnection</controlURL>
+				<eventSubURL>/upnp/event?WANPPPConnection</eventSubURL>
+			</service>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:WANIPConnection:2</serviceType>
+				<serviceId>urn:upnp-org:serviceId:WANIPConn1</serviceId>
+				<SCPDURL>/igd2_wic.xml</SCPDURL>
+				<controlURL>/upnp/control?WANIPConnection</controlURL>
+				<eventSubURL>/upnp/event?WANIPConnection</eventSubURL>
+			</service>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:WANIPv6FirewallControl:1</serviceType>
+				<serviceId>urn:upnp-org:serviceId:WANIPv6Firewall1</serviceId>
+				<SCPDURL>/igd2_6fc.xml</SCPDURL>
+				<controlURL>/upnp/control?WANIPv6FirewallControl</controlURL>
+				<eventSubURL>/upnp/event?WANIPv6FirewallControl</eventSubURL>
+			</service>
+			</serviceList>
+		</device>
+		</deviceList>
+	</device>
+	</deviceList>
+
+	<presentationURL>/</presentationURL>
+</device>
+</root>

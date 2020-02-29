@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<device>
+<deviceType>urn:dslforum-org:device:InternetGatewayDevice:1</deviceType>
+<friendlyName>Yabox</friendlyName>
+<manufacturer>Huawei Technologies Co., Ltd.</manufacturer>
+<manufacturerURL>http://www.huawei.com</manufacturerURL>
+<modelDescription>Huawei Home Gateway</modelDescription>
+<modelName>Yabox</modelName>
+<modelNumber>Huawei Model</modelNumber>
+<modelURL>http://www.huawei.com</modelURL>
+<serialNumber>M5G8WB1340206131</serialNumber>
+<UDN>uuid:00e0fc37-2626-2828-2600-e8cd2d309f4d</UDN>
+<UPC>000000000001</UPC>
+<serviceList>
+<service>
+<serviceType>urn:dslforum-org:service:UserInterface:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:UserInterface1</serviceId>
+<SCPDURL>/desc/UserItf.xml</SCPDURL>
+<controlURL>/ctrlt/UserInterface_1</controlURL>
+<eventSubURL>/evt/UserInterface_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:www-huawei-com:service:DeviceConfig:1</serviceType>
+<serviceId>urn:www-huawei-com:serviceId:DeviceConfig1</serviceId>
+<SCPDURL>/desc/DevCfg.xml</SCPDURL>
+<controlURL>/ctrlt/DeviceConfig_1</controlURL>
+<eventSubURL>/evt/DeviceConfig_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:dslforum-org:service:LANConfigSecurity:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:LANConfigSecurity1</serviceId>
+<SCPDURL>/desc/LANSec.xml</SCPDURL>
+<controlURL>/ctrlt/LANConfigSecurity_1</controlURL>
+<eventSubURL>/evt/LANConfigSecurity_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:dslforum-org:service:Layer3Forwarding:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:Layer3Forwarding1</serviceId>
+<SCPDURL>/desc/L3Fwd.xml</SCPDURL>
+<controlURL>/ctrlt/Layer3Forwarding_1</controlURL>
+<eventSubURL>/evt/Layer3Forwarding_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:www-huawei-com:service:DeviceUpgrade:1</serviceType>
+<serviceId>urn:www-huawei-com:serviceId:DeviceUpgrade1</serviceId>
+<SCPDURL>/desc/DevUpg.xml</SCPDURL>
+<controlURL>/ctrlt/DeviceUpgrade_1</controlURL>
+<eventSubURL>/evt/DeviceUpgrade_1</eventSubURL>
+</service>
+</serviceList>
+<deviceList>
+<device>
+<deviceType>urn:dslforum-org:device:WANDevice:1</deviceType>
+<friendlyName>WANDevice</friendlyName>
+<manufacturer>Huawei Technologies Co., Ltd.</manufacturer>
+<manufacturerURL>http://www.huawei.com</manufacturerURL>
+<modelDescription>Huawei Home Gateway</modelDescription>
+<modelName>Yabox</modelName>
+<modelNumber>Huawei Model</modelNumber>
+<modelURL>http://www.huawei.com</modelURL>
+<serialNumber>M5G8WB1340206131</serialNumber>
+<UDN>uuid:00e0fc37-2626-2828-2601-e8cd2d309f4d</UDN>
+<UPC>000000000001</UPC>
+<serviceList>
+<service>
+<serviceType>urn:dslforum-org:service:WANDSLInterfaceConfig:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:WANDSLInterfaceConfig1</serviceId>
+<SCPDURL>/desc/WanDslIfCfg.xml</SCPDURL>
+<controlURL>/ctrlt/WANDSLInterfaceConfig_1</controlURL>
+<eventSubURL>/evt/WANDSLInterfaceConfig_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:dslforum-org:service:WANCommonInterfaceConfig:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:WANCommonInterfaceConfig1</serviceId>
+<SCPDURL>/desc/WanCommonIfc1.xml</SCPDURL>
+<controlURL>/ctrlt/WANCommonInterfaceConfig_1</controlURL>
+<eventSubURL>/evt/WANCommonInterfaceConfig_1</eventSubURL>
+</service>
+</serviceList>
+<deviceList>
+<device>
+<deviceType>urn:dslforum-org:device:WANConnectionDevice:1</deviceType>
+<friendlyName>WANConnectionDevice</friendlyName>
+<manufacturer>Huawei Technologies Co., Ltd.</manufacturer>
+<manufacturerURL>http://www.huawei.com</manufacturerURL>
+<modelDescription>Huawei Home Gateway</modelDescription>
+<modelName>Yabox</modelName>
+<modelNumber>Huawei Model</modelNumber>
+<modelURL>http://www.huawei.com</modelURL>
+<serialNumber>M5G8WB1340206131</serialNumber>
+<UDN>uuid:00e0fc37-2626-2828-2607-e8cd2d309f4d</UDN>
+<UPC>000000000001</UPC>
+<serviceList>
+<service>
+<serviceType>urn:dslforum-org:service:WANIPConnection:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:WANIPConnection1</serviceId>
+<SCPDURL>/desc/WanIpConn.xml</SCPDURL>
+<controlURL>/ctrlt/WANIPConnection_1</controlURL>
+<eventSubURL>/evt/WANIPConnection_1</eventSubURL>
+</service>
+<service>
+<serviceType>urn:dslforum-org:service:WANDSLLinkConfig:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:WANDSLLinkConfig1</serviceId>
+<SCPDURL>/desc/WanDslLink.xml</SCPDURL>
+<controlURL>/ctrlt/WANDSLLinkConfig_1</controlURL>
+<eventSubURL>/evt/WANDSLLinkConfig_1</eventSubURL>
+</service>
+</serviceList>
+</device>
+</deviceList>
+</device>
+<device>
+<deviceType>urn:dslforum-org:device:LANDevice:1</deviceType>
+<friendlyName>LANDevice</friendlyName>
+<manufacturer>Huawei Technologies Co., Ltd.</manufacturer>
+<manufacturerURL>http://www.huawei.com</manufacturerURL>
+<modelDescription>Huawei Home Gateway</modelDescription>
+<modelName>Yabox</modelName>
+<modelNumber>Huawei Model</modelNumber>
+<modelURL>http://www.huawei.com</modelURL>
+<serialNumber>M5G8WB1340206131</serialNumber>
+<UDN>uuid:00e0fc37-2626-2828-2605-e8cd2d309f4d</UDN>
+<UPC>000000000001</UPC>
+<serviceList>
+<service>
+<serviceType>urn:dslforum-org:service:LANHostConfigManagement:1</serviceType>
+<serviceId>urn:dslforum-org:serviceId:LANHostConfigManagement1</serviceId>
+<SCPDURL>/desc/LanHostCfgMgmt.xml</SCPDURL>
+<controlURL>/ctrlt/LANHostConfigManagement_1</controlURL>
+<eventSubURL>/evt/LANHostConfigManagement_1</eventSubURL>
+</service>
+</serviceList>
+</device>
+</deviceList>
+<presentationURL>http://192.168.7.252</presentationURL>
+</device>
+</root>

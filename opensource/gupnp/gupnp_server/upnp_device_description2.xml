@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root  xmlns:hmx="urn:schemas-humax-co-kr:metadata-1-0" xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+
+  <device>
+    <people id='123' name='mhkang'>Kang, Myung Hun</people>
+    <hmx:X_HMXCAP>My Caps by mhkang</hmx:X_HMXCAP>
+    <deviceType>urn:schemas-upnp-org:device:HumaxOtt:1</deviceType>
+    <friendlyName>H3 OTT</friendlyName>
+    <manufacturer>HUMAX Corp.</manufacturer>
+    <modelName>H3 OTT BOX</modelName>
+    <UDN>uuid:cc93d8e6-6b8b-4f60-87ca-228c36b5b0e8</UDN>
+
+  </device>
+</root>

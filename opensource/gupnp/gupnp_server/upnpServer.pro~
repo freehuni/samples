@@ -1,0 +1,18 @@
+TEMPLATE = app
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG -= qt
+
+#SOURCES += main.cpp
+SOURCES +=  light-server.cpp
+
+LIBS+= /usr/lib/i386-linux-gnu/libglib-2.0.so
+LIBS+= /usr/lib/i386-linux-gnu/libgobject-2.0.so
+LIBS+= /usr/lib/libgupnp-1.0.so
+
+INCLUDEPATH+=/usr/include/gupnp-1.0/
+INCLUDEPATH+=/usr/include/glib-2.0/
+INCLUDEPATH+=/usr/lib/i386-linux-gnu/glib-2.0/include/
+INCLUDEPATH+=/usr/include/gssdp-1.0/
+INCLUDEPATH+=/usr/include/libsoup-2.4/
+INCLUDEPATH+=/usr/include/libxml2/
