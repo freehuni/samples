@@ -7,13 +7,33 @@
 using namespace std;
 using namespace log4cxx;
 
+LoggerPtr rootlog=Logger::getRootLogger();
+LoggerPtr log = Logger::getLogger("");
+
+class Base
+{
+public:
+	Base()
+	{
+
+	}
+	~Base()
+	{
+		LOG4CXX_ERROR(log, "Destructor");
+	}
+	void GetValue()
+	{
+		LOG4CXX_INFO(log, "My name is airboy.");
+	}
+};
+
 int main()
 {
 	string file="log4cxx.conf";
 	PropertyConfigurator::configure(File(file));
-	LoggerPtr rootlog=Logger::getRootLogger();
-	LoggerPtr log = Logger::getLogger("");
+	Base obj;
 
+	obj.GetValue();
 
 	LOG4CXX_DEBUG(log, "Hello");
 	LOG4CXX_WARN(log, "Freehuni");
