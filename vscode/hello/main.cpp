@@ -21,13 +21,13 @@ void test_future()
     string name="freehuni";
     future<void> call=std::async(launch::async, threadproc, name);
 
-    printLog(__FUNCTION__);
+    printLog(__FUNCTION__, __LINE__, "%s", "hello");
 }
 
 int main()
 {
     test_future();    
-    printLog("Hello");
+    printLog(__FUNCTION__, __LINE__, "%s","frehuni");
     
     return 0;
 }

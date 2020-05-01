@@ -1,5 +1,3 @@
 #pragma once
 
-#include <string>
-
-void printLog(std::string msg);
+void printLog(const char* funcname, int codeline, char* fmt, ...);
