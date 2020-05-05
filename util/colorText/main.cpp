@@ -1,36 +1,44 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
+/**
+		foreground background
+black      30         40
+red        31         41
+green      32         42
+yellow     33         43
+blue       34         44
+magenta    35         45
+cyan       36         46
+white      37         47
+ */
+
+// Reference Site: https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal
 int main()
 {
-/*
-    printf("\x1B[31mTexting\033[0m\n");  // Red
-    printf("\x1B[32mTexting\033[0m\n");  // Green
-    printf("\x1B[33mTexting\033[0m\n");  // Yellow
-    printf("\x1B[34mTexting\033[0m\n");  // Blue
-    printf("\x1B[35mTexting\033[0m\n");  // Magenta
+	vector<unsigned char> foreColorTables={30,31,32,33,34,35,36,37};
+	vector<unsigned char> backColorTables={40,41,42,43,44,45,46,47};
 
-    printf("\x1B[36mTexting\033[0m\n"); // Cyon
-    printf("\x1B[37mTexting\033[0m\n"); // Gray
-    printf("\x1B[39mTexting\033[0m\n"); // White
-    printf("\x1B[93mTexting\033[0m\n"); // Light Yellow
+	for(unsigned char backColor : backColorTables)
+	{
+		for(unsigned char foreColor : foreColorTables)
+		{
+			if (backColor == 40)
+			{
+				// if BackColor is black, background coloe should be transparent.
+				printf("\033[1;%dmCOLOR TEXT\033[0m  [1:%d:%d] ",foreColor,foreColor, backColor);
+				printf("\033[2;%dmCOLOR TEXT\033[0m  [2:%d:%d]\n" ,foreColor,foreColor, backColor);
+			}
+			else
+			{
+				printf("\033[1;%d;%dmCOLOR TEXT\033[0m  [1:%d:%d] ",foreColor, backColor,foreColor, backColor);
+				printf("\033[2;%d;%dmCOLOR TEXT\033[0m  [2:%d:%d]\n" ,foreColor, backColor,foreColor, backColor);
+			}
 
-    printf("\033[3;42;30mTexting\033[0m\n");    // black/green
-    printf("\033[3;43;30mTexting\033[0m\n");    // black/yellow
-    printf("\033[3;43;31mTexting\033[0m\n");    // red/yellow
-    printf("\033[3;44;30mTexting\033[0m\n");    // black/blue
-    printf("\033[3;104;30mTexting\033[0m\n");   // black/light blue
-    printf("\033[3;100;30mTexting\033[0m\n");   // black/dark gray
+		}
+	}
 
-    printf("\033[3;47;35mTexting\033[0m\n");
-    printf("\033[2;47;31mTexting\033[0m\n");
-    printf("\033[1;47;35mTexting\033[0m\n");
-*/
-    for(int i=0 ; i < 100 ; i++)
-    {
-        printf("\x1B[%dmTexting(%d)\033[0m\n", i, i);
-    }
-
-    return 0;
+	return 0;
 }
