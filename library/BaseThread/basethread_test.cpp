@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "basethread.h"
 
+using namespace Freehuni;
+
 class Worker : public BaseThread
 {
 public:

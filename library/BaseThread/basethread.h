@@ -4,26 +4,31 @@
 #include <thread>
 #include <condition_variable>
 
-class BaseThread
+namespace Freehuni
 {
-public:
-	BaseThread();
-	virtual ~BaseThread();
+	class BaseThread
+	{
+	public:
+		BaseThread();
+		virtual ~BaseThread();
 
-	bool Start();
-	bool Stop();
-	bool IsRunning();
+		bool Start();
+		bool Stop();
+		bool IsRunning();
 
-	virtual void threadBody() = 0;
-	void threadproc();
+	protected:
+		virtual void threadBody() = 0;
 
-private:
-	std::thread mThread;
-	std::condition_variable mCond;
-	std::mutex mLock;
-	bool mIsReady;
-	bool mIsRunning;
+	private:
+		void threadproc();
 
-};
+	private:
+		std::thread mThread;
+		std::condition_variable mCond;
+		std::mutex mLock;
+		bool mIsReady;
+		bool mIsRunning;
+	};
+}
 
 #endif // BASETHREAD_H
