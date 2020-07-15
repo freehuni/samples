@@ -22,6 +22,7 @@ void test_future()
     future<void> call=std::async(launch::async, threadproc, name);
 
     printLog(__FUNCTION__, __LINE__, "%s", "hello");
+    call.get();
 }
 
 int main()

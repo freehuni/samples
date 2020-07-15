@@ -7,10 +7,6 @@
 using namespace std;
 using namespace tutorial;
 
-/*
- * protoc --cpp_out=cpp hello.proto
-*/
-
 void toFile()
 {
     Person man;
@@ -36,11 +32,8 @@ void fromFile()
 
 int main()
 {
-
     toFile();
-    fromFile();
+    fromFile(); 
 
-
-    printf("hello~\n");
     return 0;
 }
