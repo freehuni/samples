@@ -20,14 +20,14 @@ namespace Freehuni
 {
 	typedef enum
 	{
-		eCmd,
-		eInfo,
-		eWarn,
-		eDebug,
-		eError,
-		eFatal,
-		eApp,
-		ePrint
+		eCmd =1,
+		eInfo = 2,
+		eWarn = 4,
+		eDebug = 8,
+		eError = 16,
+		eFatal = 32,
+		eApp = 64,
+		ePrint=128
 	} eLEVEL;
 
 	class Logger
@@ -43,10 +43,11 @@ namespace Freehuni
 			{ePrint, "PRT"},
 			};
 		int mLogLevel;
+		std::string mLogFile;
 	public:
 		Logger();
 
-		void SetLevel(int logLevel);
+		void SetLevel(int logLevel, std::string logFile="");
 		void WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
 	};
 }

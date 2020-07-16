@@ -8,6 +8,8 @@ TEST(LoggerTest, WriteLog)
 {
 	Logger* logger=new Logger;
 
+	logger->SetLevel(eDebug | eFatal);
+
 	LOG_PRINT(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id));
 	LOG_INFO(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id));
 	LOG_WARN(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id));

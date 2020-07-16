@@ -7,9 +7,10 @@ namespace Freehuni
 		mLogLevel = 0;
 	}
 
-	void Logger::SetLevel(int logLevel)
+	void Logger::SetLevel(int logLevel, std::string logFile)
 	{
 		mLogLevel = logLevel;
+		mLogFile = logFile;
 	}
 
 	void Logger::WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...)
