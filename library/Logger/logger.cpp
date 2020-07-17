@@ -1,7 +1,61 @@
 #include "logger.h"
+#include <map>
+#include <string>
 
 namespace Freehuni
 {
+	class WeekManager
+	{
+	typedef enum
+		{
+			eSun,
+			eMon,
+			eTue,
+			eWed,
+			eThr,
+			eFri,
+			eSat
+		} eWEEK;
+
+	std::map<eWEEK, std::string> mWeekString=
+	{
+		{eSun,"sun"},
+		{eMon,"mon"},
+		{eTue,"tue"},
+		{eWed,"wed"},
+		{eThr,"thr"},
+		{eFri,"fri"},
+		{eSat,"sat"}
+	};
+
+	public:
+		WeekManager();
+
+		eWEEK GetWeek()
+		{
+#ifdef UNIT_TEST
+			return mWeekDay;
+#else
+			time_t t=time(0);
+			struct tm* now = localtime(&t);
+			return (eWEEK)now->tm_wday;
+#endif
+		}
+
+		const char* GetWeekString(eWEEK week)
+		{
+			return mWeekString[week].c_str();
+		}
+
+		void SetCurrentWeek(eWEEK week)
+		{
+			mWeekDay = week;
+		}
+
+	private:
+		eWEEK mWeekDay;
+	};
+
 	Logger::Logger()
 	{
 		mLogLevel = 0;
@@ -11,13 +65,17 @@ namespace Freehuni
 	{
 		mLogLevel = logLevel;
 		mLogFile = logFile;
+
+		// path 구분
+		// 파일 이름
+		// 확장자
 	}
 
-	void Logger::WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...)
+	bool Logger::WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...)
 	{
 		char logMessage[4096]={0};
 
-		if (!(elevel & mLogLevel)) return;
+		if (!(elevel & mLogLevel)) return false;
 
 		std::va_list arg;
 		va_start(arg, fmt);
@@ -37,5 +95,7 @@ namespace Freehuni
 				funcName, codeLine,
 				logMessage);
 		fflush(stderr);
+
+		return true;
 	}
 }

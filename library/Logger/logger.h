@@ -6,6 +6,7 @@
 #include <map>
 #include <string>
 #include <thread>
+#include <fstream>
 
 #define LOG_COMMAND(logger, fmt,...)	logger->WriteLog(eCmd, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
 #define LOG_INFO(logger, fmt,...)		logger->WriteLog(eInfo, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
@@ -15,6 +16,10 @@
 #define LOG_FATAL(logger, fmt,...)		logger->WriteLog(eFatal, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
 #define LOG_APP(logger, fmt,...)		logger->WriteLog(eApp, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
 #define LOG_PRINT(logger, fmt,...)		logger->WriteLog(ePrint, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
+
+/*
+일주일단위로 생성되는 로그파일이 Rotation된다.
+*/
 
 namespace Freehuni
 {
@@ -27,7 +32,8 @@ namespace Freehuni
 		eError = 16,
 		eFatal = 32,
 		eApp = 64,
-		ePrint=128
+		ePrint=128,
+		eAll=0xff
 	} eLEVEL;
 
 	class Logger
@@ -48,7 +54,13 @@ namespace Freehuni
 		Logger();
 
 		void SetLevel(int logLevel, std::string logFile="");
-		void WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
+		bool WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
+
+	private:
+		std::string mPath;
+		std::string mName;
+		std::string mFullLogFile;
+		std::ofstream mOutFile;
 	};
 }
 #endif // LOGGER_H
