@@ -8,30 +8,24 @@ TEST(GetTokenTest, Simple)
 {
 	vector<string> tokens;
 
-	tokens = Utility::GetTokens("00:aa:11:bb:22:cc:33", ':');
+	tokens = Utility::GetTokens("00:aa:11:bb:22:cc", ':');
 	for(string token: tokens)
 	{
 		printf("token:%s\n", token.c_str());
 	}
 
 	EXPECT_EQ(tokens.size(), 6);
-
-
 }
 
-
-TEST(RegexTest, Simple)
+TEST(GetTokenTest, DoubleColon)
 {
-	string str="aaa:bbb:ccc:ddd::111";
-	regex reg(":+");
+	vector<string> tokens;
 
-	sregex_token_iterator it(str.begin(), str.end(), reg, -1);
-	sregex_token_iterator end;
-
-	vector<string> vec(it, end);
-
-	for(string text : vec)
+	tokens = Utility::GetTokens("00:aa:11:bb:22::cc", ':');
+	for(string token: tokens)
 	{
-		cout << "TOKENS:" <<text << endl;
+		printf("token:%s\n", token.c_str());
 	}
+
+	EXPECT_EQ(tokens.size(), 7);
 }
