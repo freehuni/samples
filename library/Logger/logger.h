@@ -36,6 +36,60 @@ namespace Freehuni
 		eAll=0xff
 	} eLEVEL;
 
+	class WeekManager
+	{
+	public:
+		typedef enum
+			{
+				eSun,
+				eMon,
+				eTue,
+				eWed,
+				eThr,
+				eFri,
+				eSat
+			} eWEEK;
+
+		std::map<eWEEK, std::string> mWeekString=
+		{
+			{eSun,"sun"},
+			{eMon,"mon"},
+			{eTue,"tue"},
+			{eWed,"wed"},
+			{eThr,"thr"},
+			{eFri,"fri"},
+			{eSat,"sat"}
+		};
+
+	public:
+		WeekManager()
+		{}
+
+		eWEEK GetWeek()
+		{
+	#ifdef UNIT_TEST
+			return mWeekDay;
+	#else
+			time_t t=time(0);
+			struct tm* now = localtime(&t);
+			return (eWEEK)now->tm_wday;
+	#endif
+		}
+
+		const char* GetWeekString(eWEEK week)
+		{
+			return mWeekString[week].c_str();
+		}
+
+		void SetCurrentWeek(eWEEK week)
+		{
+			mWeekDay = week;
+		}
+
+	private:
+		eWEEK mWeekDay;
+	};
+
 	class Logger
 	{
 		std::map<eLEVEL, std::string> mLevelString ={
@@ -57,10 +111,12 @@ namespace Freehuni
 		bool WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
 
 	private:
-		std::string mPath;
-		std::string mName;
-		std::string mFullLogFile;
+		std::string mLogPath;
+		std::string mLogName;
+		std::string mLogExt;
 		std::ofstream mOutFile;
+
+
 	};
 }
 #endif // LOGGER_H

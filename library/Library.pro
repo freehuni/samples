@@ -3,6 +3,8 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+DEFINES += UNIT_TEST
+
 SOURCES += main.cpp \
     BaseThread/basethread.cpp \
     BaseThread/basethread_test.cpp \

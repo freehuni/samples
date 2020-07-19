@@ -2,60 +2,10 @@
 #include <map>
 #include <string>
 
+using namespace std;
+
 namespace Freehuni
 {
-	class WeekManager
-	{
-	typedef enum
-		{
-			eSun,
-			eMon,
-			eTue,
-			eWed,
-			eThr,
-			eFri,
-			eSat
-		} eWEEK;
-
-	std::map<eWEEK, std::string> mWeekString=
-	{
-		{eSun,"sun"},
-		{eMon,"mon"},
-		{eTue,"tue"},
-		{eWed,"wed"},
-		{eThr,"thr"},
-		{eFri,"fri"},
-		{eSat,"sat"}
-	};
-
-	public:
-		WeekManager();
-
-		eWEEK GetWeek()
-		{
-#ifdef UNIT_TEST
-			return mWeekDay;
-#else
-			time_t t=time(0);
-			struct tm* now = localtime(&t);
-			return (eWEEK)now->tm_wday;
-#endif
-		}
-
-		const char* GetWeekString(eWEEK week)
-		{
-			return mWeekString[week].c_str();
-		}
-
-		void SetCurrentWeek(eWEEK week)
-		{
-			mWeekDay = week;
-		}
-
-	private:
-		eWEEK mWeekDay;
-	};
-
 	Logger::Logger()
 	{
 		mLogLevel = 0;
@@ -66,9 +16,34 @@ namespace Freehuni
 		mLogLevel = logLevel;
 		mLogFile = logFile;
 
+		if (logFile.empty()) return;
+
+		int pos = logFile.find_last_of("/");	// Check Directory
+		if (pos == string::npos) // In case of No Directory
+		{
+			mLogPath=".";
+
+			pos = logFile.find_last_of(".");	// Check File Extension
+			if (pos != string::npos)	// In case of existing File Extension
+			{
+				mLogName= logFile.substr(0, pos);
+				mLogExt = logFile.substr(pos + 1, logFile.size());
+			}
+			else
+			{
+				mLogName = logFile;
+			}
+		}
+		else
+		{
+			mLogPath=logFile.substr(0, pos);
+		}
 		// path 구분
 		// 파일 이름
 		// 확장자
+		mLogPath;
+		mLogName;
+		mLogExt;
 	}
 
 	bool Logger::WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...)

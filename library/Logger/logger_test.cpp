@@ -4,6 +4,15 @@
 using namespace Freehuni;
 
 
+TEST(WeekTest, SetWeek)
+{
+	WeekManager week;
+	week.SetCurrentWeek(WeekManager::eMon);
+	EXPECT_EQ(week.GetWeek(), WeekManager::eMon);
+	week.SetCurrentWeek(WeekManager::eFri);
+	EXPECT_EQ(week.GetWeek(), WeekManager::eFri);
+}
+
 TEST(LogLevelTest, DebugFatal)
 {
 	Logger* logger=new Logger;
@@ -44,12 +53,4 @@ TEST(LogFileTest, Simple)
 
 	logger->SetLevel(eAll, "Simple.log");
 
-	EXPECT_TRUE(LOG_PRINT(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_INFO(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_WARN(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_DEBUG(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_ERROR(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_FATAL(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_APP(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
-	EXPECT_TRUE(LOG_PRINT(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
 }
