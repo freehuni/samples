@@ -112,7 +112,7 @@ namespace Freehuni
 
 	private:
 		std::string mLogPath;
-		std::string mLogName;
+		std::string mLogTitle;
 		std::string mLogExt;
 		std::ofstream mOutFile;
 

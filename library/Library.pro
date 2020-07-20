@@ -5,6 +5,10 @@ CONFIG -= qt
 
 DEFINES += UNIT_TEST
 
+INCLUDEPATH += Logger
+INCLUDEPATH += Utility
+INCLUDEPATH += BaseThread
+
 SOURCES += main.cpp \
     BaseThread/basethread.cpp \
     BaseThread/basethread_test.cpp \

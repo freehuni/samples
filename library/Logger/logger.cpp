@@ -1,11 +1,72 @@
 #include "logger.h"
 #include <map>
 #include <string>
+#include <iostream>
+#include <utility.h>
 
 using namespace std;
 
 namespace Freehuni
 {
+	class LoggerOutput
+	{
+	public:
+		LoggerOutput() : mNextOutput(nullptr)
+		{}
+		virtual void Print(const char* fmt, ...) = 0;
+
+	protected:
+		LoggerOutput* mNextOutput;
+	};
+
+	class ConsoleOutput : public LoggerOutput
+	{
+	public:
+		ConsoleOutput()
+		{}
+		void Print(const char* fmt, ...) override;
+
+	protected:
+
+
+	};
+
+	void ConsoleOutput::Print(const char* fmt, ...)
+	{
+		char logMessage[4096]={0};
+
+		std::va_list arg;
+		va_start(arg, fmt);
+		vsnprintf(logMessage, 4096, fmt, arg);
+		va_end(arg);
+
+		cout << logMessage;
+
+		if (mNextOutput != nullptr)
+		{
+			mNextOutput->Print(logMessage);
+		}
+	}
+
+
+	class ColorConsoleOutput : public ConsoleOutput
+	{
+	public:
+		ColorConsoleOutput(){}
+
+	protected:
+		void Print(const char* fmt, ...) override;
+	};
+
+	class UdpOutput : public LoggerOutput
+	{
+	public:
+		UdpOutput(){}
+
+	protected:
+		void Print(const char* fmt, ...) override;
+	};
+
 	Logger::Logger()
 	{
 		mLogLevel = 0;
@@ -16,34 +77,8 @@ namespace Freehuni
 		mLogLevel = logLevel;
 		mLogFile = logFile;
 
-		if (logFile.empty()) return;
-
-		int pos = logFile.find_last_of("/");	// Check Directory
-		if (pos == string::npos) // In case of No Directory
-		{
-			mLogPath=".";
-
-			pos = logFile.find_last_of(".");	// Check File Extension
-			if (pos != string::npos)	// In case of existing File Extension
-			{
-				mLogName= logFile.substr(0, pos);
-				mLogExt = logFile.substr(pos + 1, logFile.size());
-			}
-			else
-			{
-				mLogName = logFile;
-			}
-		}
-		else
-		{
-			mLogPath=logFile.substr(0, pos);
-		}
-		// path 구분
-		// 파일 이름
-		// 확장자
-		mLogPath;
-		mLogName;
-		mLogExt;
+		mLogPath=".";
+		Utility::ParsePath(logFile, mLogPath, mLogTitle, mLogExt);
 	}
 
 	bool Logger::WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...)
