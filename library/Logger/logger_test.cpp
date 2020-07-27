@@ -1,23 +1,16 @@
 #include <gtest/gtest.h>
 #include "logger.h"
+#include "loggeroutput.h"
 
 using namespace Freehuni;
-
-
-TEST(WeekTest, SetWeek)
-{
-	WeekManager week;
-	week.SetCurrentWeek(WeekManager::eMon);
-	EXPECT_EQ(week.GetWeek(), WeekManager::eMon);
-	week.SetCurrentWeek(WeekManager::eFri);
-	EXPECT_EQ(week.GetWeek(), WeekManager::eFri);
-}
+using namespace std;
 
 TEST(LogLevelTest, DebugFatal)
 {
-	Logger* logger=new Logger;
+	shared_ptr<Logger> logger(new Logger);
 
 	logger->SetLevel(eDebug | eFatal);
+	logger->AddOutput(new ConsoleOutput);
 
 	EXPECT_FALSE(LOG_PRINT(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
 	EXPECT_FALSE(LOG_INFO(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
@@ -32,9 +25,10 @@ TEST(LogLevelTest, DebugFatal)
 
 TEST(LogLevelTest, All)
 {
-	Logger* logger=new Logger;
+	shared_ptr<Logger> logger(new Logger);
 
 	logger->SetLevel(eAll);
+	logger->AddOutput(new ConsoleOutput);
 
 	EXPECT_TRUE(LOG_PRINT(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
 	EXPECT_TRUE(LOG_INFO(logger, "frehuni: sizeof(%d)",  sizeof(std::thread::id)));
@@ -51,6 +45,7 @@ TEST(LogFileTest, Simple)
 {
 	Logger* logger=new Logger;
 
-	logger->SetLevel(eAll, "Simple.log");
+	logger->SetLevel(eAll);
 
 }
+

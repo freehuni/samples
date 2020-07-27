@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/****************************************************
+ *
+ * GetToken Test
+ *
+ ****************************************************/
 TEST(GetTokenTest, Simple)
 {
 	vector<string> tokens;
@@ -30,6 +35,11 @@ TEST(GetTokenTest, DoubleColon)
 	EXPECT_EQ(tokens.size(), 7);
 }
 
+/****************************************************
+ *
+ * ParsePath Test
+ *
+ ****************************************************/
 TEST(ParsePathTest,  Title)
 {
 	const string Filename="hello";

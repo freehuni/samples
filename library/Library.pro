@@ -15,13 +15,19 @@ SOURCES += main.cpp \
     Logger/logger.cpp \
     Logger/logger_test.cpp \
     Utility/utility.cpp \
-    Utility/utility_test.cpp
+    Utility/utility_test.cpp \
+    Utility/week.cpp \
+    Utility/week_test.cpp \
+    Logger/loggeroutput.cpp \
+    Logger/loggeroutput_test.cpp
 
 
 HEADERS += ./BaseThread/basethread.h \
     BaseThread/basethread.h \
     Logger/logger.h \
-    Utility/utility.h
+    Utility/utility.h \
+    Utility/week.h \
+    Logger/loggeroutput.h
 
 LIBS += -lpthread
 LIBS += -lgtest
