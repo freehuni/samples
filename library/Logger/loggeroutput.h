@@ -1,15 +1,36 @@
 #ifndef LOGGEROUTPUT_H
 #define LOGGEROUTPUT_H
 
+#include "logger.h"
+
 namespace Freehuni
 {
 	class LoggerOutput
 	{
 	public:
-		LoggerOutput()
+		LoggerOutput() : mLogLevel(eNone)
 		{}
 		virtual ~LoggerOutput(){}
-		virtual void Print(const char* fmt, ...) = 0;
+
+		virtual bool Print(eLOG_LEVEL eLevel, const char* funcName, const int codeLine, char* message) = 0;
+		void SetLogLevel(int eLevel)
+		{
+			mLogLevel = eLevel;
+		}
+
+
+	protected:
+		std::map<eLOG_LEVEL, std::string> mLevelString ={
+			{eCmd, "CMD"},
+			{eInfo, "INF"},
+			{eWarn, "WRN"},
+			{eDebug, "DBG"},
+			{eError, "ERR"},
+			{eFatal, "FAT"},
+			{eApp, "APP"},
+			{ePrint, "PRT"},
+			};
+		int	mLogLevel;
 	};
 
 
@@ -18,41 +39,42 @@ namespace Freehuni
 	public:
 		ConsoleOutput()
 		{}
-		void Print(const char* fmt, ...) override;
+		bool Print(eLOG_LEVEL eLevel, const char* funcName, const int codeLine, char* message) override;
 
 	};
 
 	class ColorConsoleOutput : public ConsoleOutput
 	{
 	public:
-		typedef enum
-		{
-			eBlack=30,
-			eRed,
-			eGreen,
-			eYellow,
-			eBlue,
-			eMagenta,
-			eCyan,
-			eWhite
-		} eForeColor;
-
-		typedef enum
-		{
-			eBackBlack=40,
-			eBackRed =41,
-			eBackGreen=42,
-			eBackYellow=43,
-			eBackBlue=44,
-			eBackMagenta=45,
-			eBackCyan=46,
-			eBackWhite=47
-		} eBackColor;
-
 		ColorConsoleOutput()
 		{}
-		void Print(const char* fmt, ...) override;
-		void Print(eForeColor foreColor, eBackColor BackColor, const char* fmt, ...);
+		bool Print(eLOG_LEVEL eLevel, const char* funcName, const int codeLine, char* message) override;
+	};
+
+	class FileOutput : public LoggerOutput
+	{
+	public:
+		FileOutput() : mFile(nullptr), mWeekDay(-1)
+		{}
+		virtual ~FileOutput()
+		{
+			closeLogger();
+		}
+
+		bool SetLogFile(const std::string path, const std::string name, bool isWeekChanged=false);
+		const std::string GetLogFile();
+
+		bool Print(eLOG_LEVEL eLevel, const char* funcName, const int codeLine, char* message) override;
+
+	private:
+		void closeLogger();
+		std::map<int, const char*> mWeek={{0,"sun"},{1,"mon"},{2,"tue"},{3,"wed"},{4,"thr"},{5,"fri"},{6,"sat"}};
+
+		FILE*	mFile;
+		std::string mPath;
+		std::string mName;
+		std::string mLogFullPath;
+		int		mWeekDay;
 
 	};
 
@@ -60,9 +82,7 @@ namespace Freehuni
 	{
 	public:
 		UdpOutput(){}
-
-	protected:
-		void Print(const char* fmt, ...) override;
+		bool Print(eLOG_LEVEL eLevel, const char* funcName, const int codeLine, char* message) override;
 	};
 }
 

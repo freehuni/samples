@@ -9,7 +9,6 @@
 #include <fstream>
 #include <week.h>
 #include <set>
-#include "loggeroutput.h"
 
 #define LOG_COMMAND(logger, fmt,...)	logger->WriteLog(eCmd, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
 #define LOG_INFO(logger, fmt,...)		logger->WriteLog(eInfo, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
@@ -26,8 +25,11 @@
 
 namespace Freehuni
 {
+	class LoggerOutput;
+
 	typedef enum
 	{
+		eNone =0,
 		eCmd =1,
 		eInfo = 2,
 		eWarn = 4,
@@ -37,29 +39,22 @@ namespace Freehuni
 		eApp = 64,
 		ePrint=128,
 		eAll=0xff
-	} eLEVEL;
+	} eLOG_LEVEL;
+
+
 
 
 	class Logger
 	{
-		std::map<eLEVEL, std::string> mLevelString ={
-			{eCmd, "CMD"},
-			{eInfo, "INF"},
-			{eWarn, "WRN"},
-			{eDebug, "DBG"},
-			{eError, "ERR"},
-			{eFatal, "FAT"},
-			{eApp, "APP"},
-			{ePrint, "PRT"},
-			};
+
 		int mLogLevel;
 
 	public:
 		Logger();
 
-		void SetLevel(int logLevel);
+		void SetLevel(int eLevel);
 		void AddOutput(LoggerOutput* output);
-		bool WriteLog(eLEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
+		bool WriteLog(eLOG_LEVEL elevel, const char*funcName, const int codeLine, const char* fmt, ...);
 
 	private:
 		std::set<LoggerOutput*> mOutput;
