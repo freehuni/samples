@@ -41,14 +41,8 @@ namespace Freehuni
 		eAll=0xff
 	} eLOG_LEVEL;
 
-
-
-
 	class Logger
 	{
-
-		int mLogLevel;
-
 	public:
 		Logger();
 
@@ -58,6 +52,7 @@ namespace Freehuni
 
 	private:
 		std::set<LoggerOutput*> mOutput;
+		int mLogLevel;
 	};
 }
 #endif // LOGGER_H

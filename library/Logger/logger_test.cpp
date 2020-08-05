@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "logger.h"
-#include "loggeroutput.h"
+#include "consoleoutput.h"
+
 
 using namespace Freehuni;
 using namespace std;

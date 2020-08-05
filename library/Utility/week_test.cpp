@@ -6,17 +6,17 @@ using namespace Freehuni;
 TEST(WeekTest, SetWeek)
 {
 	Week week;
-	week.SetWeek(Week::eMon);
-	EXPECT_EQ(week.GetWeek(), Week::eMon);
-	week.SetWeek(Week::eFri);
-	EXPECT_EQ(week.GetWeek(), Week::eFri);
+	week.SetWeek(Week::eWeekMon);
+	EXPECT_EQ(week.GetWeek(), Week::eWeekMon);
+	week.SetWeek(Week::eWeekFri);
+	EXPECT_EQ(week.GetWeek(), Week::eWeekFri);
 }
 
 TEST(WeekTest, GetWeek)
 {
 	Week week;
 
-	EXPECT_STREQ(week.GetWeek(Week::eTue), "tue");
+	EXPECT_STREQ(week.GetWeek(Week::eWeekTue), "tue");
 
 
 }

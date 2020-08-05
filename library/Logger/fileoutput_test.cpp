@@ -1,32 +1,16 @@
 #include <gtest/gtest.h>
 #include <vector>
-#include "colorconsoleoutput.h"
 #include "fileoutput.h"
 
 using namespace Freehuni;
-using namespace std;
 
-TEST(ConsoleOutputTest, Simple)
+TEST(FileOutputTest, All)
 {
-	ConsoleOutput output;
-
-	output.Print(Freehuni::eInfo, __FUNCTION__, __LINE__,	"ConsoleOutputTest.Simple");
-}
-
-
-TEST(ColoeConsoleOutputTest, Simple)
-{
-	ColorConsoleOutput output;
-
-	output.Print(Freehuni::eInfo, __FUNCTION__, __LINE__,	"ColoeConsoleOutputTest.Simple");
-}
-
-
-TEST(ColoeConsoleOutputTest, All)
-{
-	ColorConsoleOutput output;
+	FileOutput output;
 
 	output.SetLogLevel(eAll);
+
+	output.SetLogFile(".","All");
 
 	output.Print(eCmd  , __FUNCTION__, __LINE__, "### eCmd ###");
 	output.Print(ePrint, __FUNCTION__, __LINE__, "### ePrint ###");
@@ -36,5 +20,7 @@ TEST(ColoeConsoleOutputTest, All)
 	output.Print(eError, __FUNCTION__, __LINE__, "### eError ###");
 	output.Print(eFatal, __FUNCTION__, __LINE__, "### eFatal ###");
 	output.Print(eApp  , __FUNCTION__, __LINE__, "### eApp ###");
-}
 
+	EXPECT_EQ(access(output.GetLogFile().c_str(), 0), 0);
+	remove(output.GetLogFile().c_str());
+}

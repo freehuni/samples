@@ -19,7 +19,12 @@ SOURCES += main.cpp \
     Utility/week.cpp \
     Utility/week_test.cpp \
     Logger/loggeroutput.cpp \
-    Logger/loggeroutput_test.cpp
+    Logger/loggeroutput_test.cpp \
+    Logger/consoleoutput.cpp \
+    Logger/colorconsoleoutput.cpp \
+    Logger/fileoutput.cpp \
+    Logger/udpoutput.cpp \
+    Logger/fileoutput_test.cpp
 
 
 HEADERS += ./BaseThread/basethread.h \
@@ -27,7 +32,11 @@ HEADERS += ./BaseThread/basethread.h \
     Logger/logger.h \
     Utility/utility.h \
     Utility/week.h \
-    Logger/loggeroutput.h
+    Logger/loggeroutput.h \
+    Logger/consoleoutput.h \
+    Logger/colorconsoleoutput.h \
+    Logger/fileoutput.h \
+    Logger/udpoutput.h
 
 LIBS += -lpthread
 LIBS += -lgtest

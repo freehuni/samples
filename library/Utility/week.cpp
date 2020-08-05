@@ -8,13 +8,7 @@ namespace  Freehuni
 
 	Week::eWEEK Week::GetWeek()
 	{
-	#ifdef UNIT_TEST
 		return mWeekDay;
-	#else
-		time_t t=time(0);
-		struct tm* now = localtime(&t);
-		return (eWEEK)now->tm_wday;
-	#endif
 	}
 
 	const char* Week::GetWeek(eWEEK week)

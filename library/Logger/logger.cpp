@@ -31,8 +31,8 @@ namespace Freehuni
 	bool Logger::WriteLog(eLOG_LEVEL eLevel, const char*funcName, const int codeLine, const char* fmt, ...)
 	{
 		char logMessage[4096]={0};
+		bool ret =true;
 
-		if (!(eLevel & mLogLevel)) return false;
 		if (mOutput.empty()) return false;
 
 		std::va_list arg;
@@ -40,25 +40,15 @@ namespace Freehuni
 		vsnprintf(logMessage, 4096, fmt, arg);
 		va_end(arg);
 
-		struct timespec tspec;
-		struct tm now;
-
-		clock_gettime(CLOCK_REALTIME, &tspec);
-		localtime_r(&tspec.tv_sec, &now);
 
 		for(LoggerOutput* output : mOutput)
 		{
-			/*
-			output->Print("[%s][%02d:%02d:%02d.%03d][%ld][%s:%d] %s\n",
-						 mLevelString[eLevel].c_str(),
-						 now.tm_hour, now.tm_min, now.tm_sec, (int)tspec.tv_nsec/1000000,
-						 std::this_thread::get_id(),
-						 funcName, codeLine,
-						 logMessage);
-			*/
-			output->Print(eLevel,funcName, codeLine, logMessage);
+			if (output->Print(eLevel, funcName, codeLine, logMessage) == false)
+			{
+				ret = false;
+			}
 		}
 
-		return true;
+		return ret;
 	}
 }

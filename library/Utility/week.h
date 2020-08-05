@@ -11,24 +11,25 @@ class Week
 public:
 	typedef enum
 		{
-			eSun,
-			eMon,
-			eTue,
-			eWed,
-			eThr,
-			eFri,
-			eSat
+			eWeekSun,
+			eWeekMon,
+			eWeekTue,
+			eWeekWed,
+			eWeekThr,
+			eWeekFri,
+			eWeekSat,
+			eWeekUnknown,
 		} eWEEK;
 
 	std::map<eWEEK, std::string> mWeekString=
 	{
-		{eSun,"sun"},
-		{eMon,"mon"},
-		{eTue,"tue"},
-		{eWed,"wed"},
-		{eThr,"thr"},
-		{eFri,"fri"},
-		{eSat,"sat"}
+		{eWeekSun,"sun"},
+		{eWeekMon,"mon"},
+		{eWeekTue,"tue"},
+		{eWeekWed,"wed"},
+		{eWeekThr,"thr"},
+		{eWeekFri,"fri"},
+		{eWeekSat,"sat"}
 	};
 
 public:
@@ -36,6 +37,10 @@ public:
 	eWEEK GetWeek();
 	const char* GetWeek(eWEEK week);
 	void SetWeek(eWEEK week);
+	const std::string operator()()
+	{
+		return mWeekString[mWeekDay];
+	}
 
 private:
 	eWEEK mWeekDay;
