@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     Logger/colorconsoleoutput.cpp \
     Logger/fileoutput.cpp \
     Logger/udpoutput.cpp \
-    Logger/fileoutput_test.cpp
+    Logger/fileoutput_test.cpp \
+    Logger/udpoutput_test.cpp
 
 
 HEADERS += ./BaseThread/basethread.h \
