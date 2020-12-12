@@ -78,6 +78,7 @@ void Logger::init()
     mImplFile = make_unique<LoggerFile>("bridge.log");
 }
 
+//==============================================
 int main()
 {
     Logger log;
