@@ -6,3 +6,4 @@ CONFIG -= qt
 SOURCES += main.cpp \
     main_test.cpp
 LIBS+= -lgtest
+LIBS += -lpthread
