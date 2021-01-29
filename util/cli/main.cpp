@@ -1,158 +1,70 @@
 ﻿#include <iostream>
-#include <functional>
-#include <vector>
-#include <string>
-#include <tuple>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "menumanager.h"
 
 using namespace std;
 
-class CLI
-{
 
-public:
-	static string getCommand(string prompt, bool addHistory = false)
-	{
-		string command;
-		char* line;
-		line = readline(prompt.c_str());
-
-		if (addHistory == true && *line ) add_history(line);
-
-		command = line;
-		free(line);
-
-		return command;
-	}
-};
-
-typedef struct
-{
-	string name;
-	string option;
-	function<bool(string)>  cbExecute;
-
-} MenuItem;
-
-class MenuManager
-{
-public:
-	typedef function<bool(string)>				MENU_ACTION;
-	typedef tuple<string, string, MENU_ACTION>	MENU_ITEM;
-	typedef vector<MENU_ITEM>					MENU_LIST;
-	typedef MENU_LIST::iterator					MENU_IT;
-
-private:
-
-	string		_menuTitle;
-	MENU_LIST	_menuItems;
-
-public:
-	MenuManager(string menuTitle, MENU_LIST menuItems)
-	{
-		_menuTitle = menuTitle;
-		_menuItems = menuItems;
-	}
-	~MenuManager()
-	{
-		_menuItems.clear();
-	}
-
-	void show()
-	{		
-		int i;
-
-		printf("\n%s\n", _menuTitle.c_str());
-
-		i = 0;
-		for (MENU_ITEM item: _menuItems)
-		{			
-			printf("  [%d] %s %s\n", i++, std::get<0>(item).c_str() , std::get<1>(item).c_str());
-		}
-	}
-
-	bool execute(string param)
-	{
-		std::size_t pos = param.find(" ");
-		string cmd, arg;
-		int menuIndex = -1;
-
-		if (pos != string::npos)
-		{
-			cmd = param.substr(0, pos);
-			arg = param.substr(pos+1);
-		}
-		else
-		{
-			cmd = param;
-		}
-
-		sscanf(cmd.c_str(), "%d", &menuIndex);
-
-		if (menuIndex >= 0)
-		{
-			if (menuIndex >= _menuItems.size())
-			{
-				printf("Select index 0 ~ %d\n", _menuItems.size() - 1);
-				return false;
-			}
-
-			std::get<2>(_menuItems[menuIndex])(arg);
-		}
-
-		for (MENU_ITEM item: _menuItems)
-		{
-			if (cmd.compare(std::get<0>(item)) == 0)
-			{
-				std::get<2>(item)( arg );
-				return true;
-			}
-		}
-
-		if (param.size() > 0) printf("Unknown command: %s\n", param.c_str());
-
-		return false;
-	}
-};
-
-// MENU Porting Layer =============================================================
-
-bool cmdStart(string arg)
-{
-	printf("%s(%s) : Do something\n", __FUNCTION__, arg.c_str());
-	return true;
+CLI::eMENU_RETURN cmdStart(string option, void* user_data)
+{	
+	printf("%s(%s) : Do something\n", __FUNCTION__, option.c_str());
+	return CLI::eContinue;
 }
 
-bool cmdStop(string arg)
+CLI::eMENU_RETURN cmdStop(string option, void* user_data)
 {
-	printf("%s(%s) : Do something\n", __FUNCTION__, arg.c_str());
-	return true;
+	printf("%s(%s) : Do something\n", __FUNCTION__, option.c_str());
+	return CLI::eContinue;
 }
 
-bool isRunning = 1;
-
-bool cmdQuit(string arg)
+CLI::eMENU_RETURN cmdShow(string option, void* user_data)
 {
-	printf("%s(%s) : exit.\n", __FUNCTION__, arg.c_str());
-	isRunning = 0;
-
-	return true;
+	return CLI::eContinue;
 }
 
-int main()
+CLI::eMENU_RETURN cmdBack(string option, void* user_data)
 {
-	MenuManager::MENU_LIST items = {{"start", "loglevel=1",  cmdStart}, {"stop", "", cmdStop}, {"quit", "", cmdQuit}};
-	MenuManager menu("Select the following menu:", items);
+	return CLI::eBack;
+}
 
-	while(isRunning)
+CLI::eMENU_RETURN cmdSubMenu(string option, void* user_data)
+{
+	CLI::MENU_LIST subItems = {{"Show", "", "", cmdShow, nullptr}, {"Back", "", "", cmdBack, nullptr}};
+	string command;
+	printf("%s(%s) : Do something\n", __FUNCTION__, option.c_str());
+
+	CLI::MenuManager menu("Select sub menus:", subItems);
+	do
 	{
 		menu.show();
 
-		string command = CLI::getCommand("ACE> ");
+		command = menu.getCommand("Console> ");
+	} while(menu.execute(command) == CLI::eContinue);
 
-		menu.execute(command);
-	}
+	return CLI::eContinue;
+}
+
+CLI::eMENU_RETURN cmdQuit(string option, void* user_data)
+{
+	printf("%s(%s) : exit.\n", __FUNCTION__, option.c_str());
+
+	return CLI::eBack;
+}
+
+
+
+int main()
+{
+	CLI::MENU_LIST items = {{"Start", "option1", "", cmdStart, nullptr}, {"Stop", "option2", "", cmdStop, nullptr}, {"Option", "param","goto sub menu", cmdSubMenu, nullptr}, {"Quit", "","", cmdQuit, nullptr}};
+	CLI::MenuManager menu("Select the following menu number:", items);
+	string command;
+
+	do
+	{
+		menu.show();
+
+		command = menu.getCommand("$ > ");
+
+	} while(menu.execute(command) == CLI::eContinue);
 
 	return 0;
 }
