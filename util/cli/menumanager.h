@@ -1,7 +1,6 @@
 #ifndef MENUMANAGER_H
 #define MENUMANAGER_H
 
-#include <iostream>
 #include <functional>
 #include <vector>
 #include <string>
@@ -45,7 +44,7 @@ protected:
 	std::vector<std::string> getTokens(const std::string& data, const char delimiter);
 
 private:
-	std::string		mMenuTitle;
+	std::string	mMenuTitle;
 	MENU_LIST	mMenuItems;
 };
 }

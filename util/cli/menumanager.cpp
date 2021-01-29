@@ -94,7 +94,7 @@ namespace CLI
 	{
 		if (isNumber(menuNameOrIndex))
 		{
-			return std::atoi(menuNameOrIndex.c_str());
+			return std::stoi(menuNameOrIndex);
 		}
 		else
 		{
