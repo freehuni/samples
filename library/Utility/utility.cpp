@@ -1,5 +1,6 @@
 #include "utility.h"
 #include <sstream>
+#include <regex>
 
 using namespace std;
 
@@ -44,4 +45,11 @@ namespace  Utility
 		}
 	}
 
+	bool IsNumber(string param)
+	{
+		regex pattern("[0-9]+");
+		smatch m;
+
+		return regex_match(param, m, pattern);
+	}
 }
