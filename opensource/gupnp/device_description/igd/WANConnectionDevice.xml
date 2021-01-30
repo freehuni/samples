@@ -1,0 +1,67 @@
+<?xml version="1.0" ?> 
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+    <specVersion>
+    <major>1</major> 
+    <minor>0</minor> 
+    </specVersion>
+    <device>
+        <deviceType>urn:schemas-upnp-org:device:InternetGatewayDevice:1</deviceType> 
+        <friendlyName>IGD Emulator</friendlyName> 
+        <manufacturer>Freehuni</manufacturer> 
+        <manufacturerURL>https://freehuni.blogspot.com/</manufacturerURL> 
+        <modelDescription>Internet Gateway Device</modelDescription>
+        <modelName>IGD</modelName> 
+        <modelNumber>1.00</modelNumber>
+        <modelURL>https://www.hanwha-security.com/</modelURL> 
+        <UDN>uuid:12342409-1234-1111-5678-ee1234cc5678</UDN> 
+    <iconList>
+        <icon>
+            <mimetype>image/jpg</mimetype>
+            <width>98</width>
+            <height>55</height>
+            <depth>32</depth>
+            <url>/igd.jpg</url>
+        </icon>
+    </iconList>
+        <deviceList>
+            <device>
+                <deviceType>urn:schemas-upnp-org:device:WANDevice:1</deviceType> 
+                <friendlyName>WANDevice</friendlyName> 
+                <manufacturer>miniupnp</manufacturer> 
+                <manufacturerURL>https://freehuni.blogspot.com/</manufacturerURL> 
+                <modelDescription>WAN Device</modelDescription> 
+                <modelName>WAN Device</modelName> 
+                <modelNumber>1</modelNumber> 
+                <modelURL>https://www.hanwha-security.com/</modelURL> 
+                <serialNumber>00000000</serialNumber> 
+                <UDN>uuid:12342409-1234-2222-5678-ee1234cc5678</UDN> 
+                <UPC>MINIUPNPD</UPC> 
+                <deviceList>
+                    <device>
+                        <deviceType>urn:schemas-upnp-org:device:WANConnectionDevice:1</deviceType> 
+                        <friendlyName>WANConnectionDevice</friendlyName> 
+                        <manufacturer>miniupnp</manufacturer> 
+                        <manufacturerURL>https://freehuni.blogspot.com/</manufacturerURL> 
+                        <modelDescription>miniupnp daemon</modelDescription> 
+                        <modelName>miniupnpd</modelName> 
+                        <modelNumber>1</modelNumber> 
+                        <modelURL>https://freehuni.blogspot.com/</modelURL> 
+                        <serialNumber>00000000</serialNumber> 
+                        <UDN>uuid:12342409-1234-3333-5678-ee1234cc5678</UDN> 
+                        <UPC>MINIUPNPD</UPC> 
+                        <serviceList>
+                            <service>
+                                <serviceType>urn:schemas-upnp-org:service:WANIPConnection:1</serviceType> 
+                                <serviceId>urn:upnp-org:serviceId:WANIPConn1</serviceId> 
+                                <controlURL>/upnp/control/WANIPConnection</controlURL> 
+                                <eventSubURL>/upnp/event/WANIPConnection</eventSubURL> 
+                                <SCPDURL>/WANIPConnection.xml</SCPDURL> 
+                            </service>
+                        </serviceList>
+                    </device>
+                </deviceList>
+            </device>
+        </deviceList>
+        <presentationURL>http://192.168.35.1/</presentationURL> 
+    </device>
+</root>
