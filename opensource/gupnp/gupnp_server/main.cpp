@@ -46,9 +46,10 @@ void on_context_available(GUPnPContextManager *manager, GUPnPContext *context, g
 	GUPnPDeviceInfo* WanConnectionDevice = NULL;
 	GUPnPServiceInfo *service = NULL;
 	char* deviceDescriptionFile = static_cast<char*>(user_data);
+	GError* error = nullptr;
 
 	/* Create root device */
-	rootDevice = gupnp_root_device_new (context, deviceDescriptionFile, ".");
+	rootDevice = gupnp_root_device_new (context, deviceDescriptionFile, ".", &error);
 	if (rootDevice == NULL)
 	{
 		printf("cannot create device!\n");
