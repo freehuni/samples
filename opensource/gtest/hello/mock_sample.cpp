@@ -103,10 +103,7 @@ void hoo(Unit* p)
 	p->move(10, 20);
 }
 
-
 using ::testing::_;
-
-
 TEST(MockUnitTest, Sample3)
 {
 	MockUnit mock;
@@ -128,7 +125,6 @@ TEST(MockUnitTest, Sample4)
 
 	hoo(&mock);
 }
-
 
 class Time {
 public:

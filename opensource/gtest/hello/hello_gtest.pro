@@ -5,8 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     main_test.cpp \
-    mock_sample.cpp \
-    tstory.cpp
+    mock_sample.cpp
 LIBS+= -lgtest
 LIBS+= -lgmock
 

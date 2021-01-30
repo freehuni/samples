@@ -1,6 +1,5 @@
-#if 0
+#if 1
 #include <gtest/gtest.h>
-
 
 
 int sum(int a, int b)
@@ -13,14 +12,14 @@ TEST(MyTestCase1, ExpectTest1)
 	ASSERT_EQ(100, sum(10, 90)) << "first";
 	EXPECT_EQ(100, sum(10, 90)) << "second";
 	EXPECT_EQ(100, sum(10, 90));
-	EXPECT_EQ(100, sum(10, 90));	
+	EXPECT_EQ(100, sum(10, 90));
 }
 
 TEST(MyTestCase1, ExpectTest2)
 {
 	EXPECT_EQ(100, sum(10, 90));
 	EXPECT_EQ(101, sum(10, 90)) << "not equaled!";
-	EXPECT_EQ(100, sum(10, 90));	
+	EXPECT_EQ(100, sum(10, 90));
 }
 
 void TestDeath()
