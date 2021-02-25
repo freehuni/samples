@@ -19,50 +19,18 @@ public:
 	virtual int getY() const = 0;
 };
 
-class Tank : public Unit
-{
-public:
-	virtual void stop()
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-	}
-
-	virtual void say(const string& message)
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-	}
-	virtual void attack(Unit* target)
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-	}
-	virtual void move(int x, int y)
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-	}
-	virtual int getX() const
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-		return 0;
-	}
-	virtual int getY() const
-	{
-		printf("[%s:%d]\n", __FUNCTION__, __LINE__);
-		return 0;
-	}
-};
-
 class MockUnit : public Unit
 {
 public:
 	virtual ~MockUnit()
 	{}
 
-	MOCK_METHOD0(stop, void());
-	MOCK_METHOD1(say, void(const string& message));
-	MOCK_METHOD1(attack, void(Unit* target));
-	MOCK_METHOD2(move, void(int x,int y));
-	MOCK_CONST_METHOD0(getX, int());
-	MOCK_CONST_METHOD0(getY, int());
+	MOCK_METHOD(void, stop, (),(override));
+	MOCK_METHOD(void, say, (const string& message),(override));
+	MOCK_METHOD(void, attack, (Unit* target),(override));
+	MOCK_METHOD(void, move, (int x,int y),(override));
+	MOCK_METHOD(int, getX, (),(const, override));
+	MOCK_METHOD(int, getY, (),(const, override));
 };
 
 void foo(Unit* p)
@@ -70,7 +38,7 @@ void foo(Unit* p)
 	p->stop();
 }
 
-TEST(MockUnitTest, Sample1)
+TEST(MockUnitTest, CheckCallOnce)
 {
 	MockUnit mock;
 
@@ -79,7 +47,6 @@ TEST(MockUnitTest, Sample1)
 	foo(&mock);
 }
 
-
 void goo(Unit* p)
 {
 	p->stop();
@@ -87,7 +54,7 @@ void goo(Unit* p)
 }
 
 using ::testing::AnyNumber;
-TEST(MockUnitTest, Sample2)
+TEST(MockUnitTest, CheckCallCount)
 {
 	MockUnit mock;
 
@@ -96,7 +63,6 @@ TEST(MockUnitTest, Sample2)
 	goo(&mock);
 }
 
-
 void hoo(Unit* p)
 {
 	p->attack(nullptr);
@@ -104,7 +70,7 @@ void hoo(Unit* p)
 }
 
 using ::testing::_;
-TEST(MockUnitTest, Sample3)
+TEST(MockUnitTest, CheckParameters)
 {
 	MockUnit mock;
 
@@ -115,7 +81,7 @@ TEST(MockUnitTest, Sample3)
 }
 
 using ::testing::InSequence;
-TEST(MockUnitTest, Sample4)
+TEST(MockUnitTest, CheckSequence)
 {
 	InSequence seq;
 	MockUnit mock;
@@ -133,6 +99,11 @@ public:
 		return "12:50";
 	}
 
+	int getValue()
+	{
+		return 0;
+	}
+
 	int getDouble(int value)
 	{
 		return value * 2;
@@ -142,20 +113,17 @@ public:
 class MockTime : public Time
 {
 public:
-	MOCK_METHOD0(getTimeString, string());
-	MOCK_METHOD1(getDouble, int(int));
+	MOCK_METHOD(string, getTimeString, ());
+	MOCK_METHOD(int, getDouble, (int));
+	MOCK_METHOD(int, getValue, ());
 };
 
 using ::testing::Return;
 TEST(TimeTest, Sample5)
 {
 	MockTime stub;
-	ON_CALL(stub, getTimeString()).WillByDefault(Return("12:511"));
-	//EXPECT_CALL(stub, getTimeString()).WillOnce(Return("12:511"));
-	//EXPECT_CALL(stub, getDouble(100)).WillOnce(Return(100*2));
+	EXPECT_CALL(stub, getValue()).Times(2).WillOnce(Return(10)).WillOnce(Return(1000));
 
-	EXPECT_CALL(stub, getTimeString());
-
-	cout << stub.getTimeString() << endl;
-	//cout << stub.getDouble(100) << endl;
+	cout << stub.getValue() << endl;
+	cout << stub.getValue() << endl;
 }
