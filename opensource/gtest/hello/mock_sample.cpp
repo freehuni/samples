@@ -92,6 +92,55 @@ TEST(MockUnitTest, CheckSequence)
 	hoo(&mock);
 }
 
+class FakeUnit : public Unit
+{
+public:
+	FakeUnit()
+	{}
+
+	virtual void stop()
+	{
+
+	}
+	virtual void say(const string& message)
+	{
+
+	}
+
+	virtual void attack(Unit* target)
+	{
+
+	}
+
+	virtual void move(int x, int y)
+	{
+
+	}
+
+	virtual int getX() const
+	{
+		return 1000;
+	}
+
+	virtual int getY() const
+	{
+		return 0;
+	}
+
+};
+
+using ::testing::Invoke;
+TEST(MockUnitTest, InvokeTest)
+{
+	MockUnit mock;
+	FakeUnit fake;
+
+	ON_CALL(mock, getX()).WillByDefault(Invoke(&fake, & FakeUnit::getX));
+	EXPECT_CALL(mock, getX()).Times(1);
+
+	cout<< "getX:" << mock.getX() << endl;
+}
+
 class Time {
 public:
 	string getTimeString()
@@ -117,6 +166,7 @@ public:
 	MOCK_METHOD(int, getDouble, (int));
 	MOCK_METHOD(int, getValue, ());
 };
+
 
 using ::testing::Return;
 TEST(TimeTest, Sample5)
