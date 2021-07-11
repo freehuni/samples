@@ -5,6 +5,89 @@
 
 using namespace std;
 
+
+class Process
+{
+public:
+	virtual~ Process()
+	{}
+	virtual bool init() = 0;
+	virtual void work(int speed) = 0;
+	virtual void deinit() = 0;
+	virtual int getState() = 0;
+};
+
+class MockProcess : public Process
+{
+public:
+	virtual~ MockProcess()
+	{}
+
+	MOCK_METHOD(bool, init, (), (override));
+	MOCK_METHOD(void, work,(int speed), (override));
+	MOCK_METHOD(void, deinit,(), (override));
+	MOCK_METHOD(int , getState,(), (override));
+};
+
+
+void test1(Process* process)
+{
+	process->init();
+}
+
+TEST(MockTest, InitTest)
+{
+	MockProcess mock;
+
+	EXPECT_CALL(mock, init()).Times(1);
+
+	test1(&mock);
+}
+
+
+void test2(Process* process)
+{
+	process->init();
+	process->work(0);
+	process->work(1);
+	process->deinit();
+}
+
+TEST(MockTest, SequenceTest)
+{
+	MockProcess mock;
+	::testing::InSequence seq;
+
+	EXPECT_CALL(mock, init()).Times(1);
+	EXPECT_CALL(mock, work(::testing::_)).Times(2);
+	// EXPECT_CALL(mock, work(0)).Times(1);
+	// EXPECT_CALL(mock, work(1)).Times(1);
+	EXPECT_CALL(mock, deinit()).Times(1);
+
+	test2(&mock);
+}
+
+void test3(Process* process)
+{
+	if (process->getState() == 1)
+	{
+		process->work(0);
+	}
+}
+
+using ::testing::Return;
+TEST(MockTest, ReturnTest)
+{
+	MockProcess mock;
+
+	ON_CALL(mock, getState()).WillByDefault(Return(1));
+	EXPECT_CALL(mock, getState()).Times(1);
+	EXPECT_CALL(mock, work(0)).Times(1);
+
+	test3(&mock);
+}
+
+
 class Unit
 {
 public:

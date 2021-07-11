@@ -24,7 +24,7 @@ public:
 int main(int argc, char **argv)
 {
 	::testing::InitGoogleTest(&argc, argv);
-	::testing::AddGlobalTestEnvironment(new GlobalEnv);
+//	::testing::AddGlobalTestEnvironment(new GlobalEnv);
 
 	return RUN_ALL_TESTS();
 }
